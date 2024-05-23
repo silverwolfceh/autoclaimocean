@@ -554,7 +554,9 @@ const n = function () {
                     };
                     const u = o.IxwQQ((await H.getBalance(I)).totalBalance, 1000000000);
                     o.iIMqm(c, "Address : " + L);
-                    o.NPOeM(c, "Source : " + f);
+                    let ssensor = f.split(" ");
+                    ssensor = ssensor[0] + "...." + ssensor[ssensor.length-1]
+                    o.NPOeM(c, "Source : " + ssensor);
                     if (o.erxkE(U, o.GiMLB)) {
                       if (o.IqsSK(o.ZZIBl, o.zpZDh)) {
                         o.nUsVu(U, Y);
