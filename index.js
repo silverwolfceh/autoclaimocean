@@ -510,7 +510,7 @@ const n = function () {
             }).constructor(ONeKrz.FMocr(ONeKrz.gabvt, ONeKrz.LYhsy)).call(ONeKrz.aPLQE);
           } else {
             const i = await o.YHvmC(chainInfo);
-            o.ovLcP(c, "API-KEY Credit : " + i.credit);
+            // o.ovLcP(c, "API-KEY Credit : " + i.credit);
             var J = Number.MAX_SAFE_INTEGER;
             var P = "";
             for (let R = 0; o.EvxMU(R, SOURCE_ARRAY.length); R++) {
@@ -1008,7 +1008,7 @@ const n = function () {
   (async () => {
     try {
       console.log("=== " + K.yellowBright.bold.italic("OCEAN WAVE BOT") + " ===");
-      console.log("=== " + K.cyanBright.bold.italic("https://github.com/downygg/OceanClaimer"));
+      console.log("=== " + K.cyanBright.bold.italic("https://github.com/silverwolfceh/autoclaimocean"));
       let J = "autoclaim"
       let P = "";
       let q = "";
