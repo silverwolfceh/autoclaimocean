@@ -1,6 +1,6 @@
 # OceanClaimer
 Auto Multi Wave Wallet on Sui Claimer (OCEAN)<br>
-- Register link : [Register Here](t.me/waveonsuibot/walletapp?startapp=2278811)
+- Register link : [Register Here](https://t.me/waveonsuibot/walletapp?startapp=2278811)
 - After register, buy SUI for claim on Binance or [OKX Wallet](https://okx.com/join/99095453)
 
 # Requirement
