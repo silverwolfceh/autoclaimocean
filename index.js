@@ -1,1077 +1,1180 @@
-const n = function () {
-    let X = true;
-    return function (U, Y) {
-      const o = X ? function () {
-        const J = {
-          IchuP: function (P) {
-            return P();
-          },
-          glEUY: "DD/MM/YY HH:mm:ss",
-          rgCrH: function (P, q) {
-            return P(q);
-          },
-          EobQT: "Please input the correct amount."
-        };
-        if (Y) {
-          const q = Y.apply(U, arguments);
-          Y = null;
-          return q;
-        }
-      } : function () {};
-      X = false;
-      return o;
+import { input, confirm, select } from "@inquirer/prompts";
+import { getFullnodeUrl, SuiClient } from "@mysten/sui.js/client";
+import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
+import { TransactionBlock } from "@mysten/sui.js/transactions";
+import { decodeSuiPrivateKey } from "@mysten/sui.js/cryptography";
+import { isValidSuiAddress } from "@mysten/sui.js/utils";
+import { getCoinOfValue } from "@polymedia/suits";
+import k from "axios";
+import V from "delay";
+import N from "moment";
+import O from "chalk";
+import f from "fs";
+const READ_SOURCE = f.readFileSync("./data.json", "utf-8");
+const SOURCE_ARRAY = JSON.parse(READ_SOURCE);
+const CLAIM_PACKAGE_ID = "0x1efaf509c9b7e986ee724596f526a22b474b15c376136772c00b8452f204d2d1";
+const CLAIM_OBJECT_ID = "0x4846a1f1030deffd9dea59016402d832588cf7e0c27b9e4c1a63d2b5e152873a";
+const OCEAN_PACKAGE_ID = "0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9";
+var apikey = "";
+const makeClaimTx = (l, y, d) => new Promise(async (A, Y) => {
+  try {
+    const H = "10000000";
+    const r = new TransactionBlock();
+    r.moveCall({
+      target: CLAIM_PACKAGE_ID + "::game::claim",
+      arguments: [r.object(CLAIM_OBJECT_ID), r.object("0x6")]
+    });
+    r.setGasBudget(H);
+    r.setSender(d);
+    const U = {
+      client: l,
+      signer: y
     };
-  }();
-//   (function () {
-//     n(this, function () {
-//       const X = {
-//         EdSwe: function (U, Y) {
-//           return U(Y);
-//         },
-//         RRoqR: function (U, Y) {
-//           return U(Y);
-//         }
-//       };
-//       const Y = new RegExp("function *\\( *\\)");
-//       const o = new RegExp("\\+\\+ *(?:[a-zA-Z_$][0-9a-zA-Z_$]*)", "i");
-//       const J = e("init");
-//       if (!Y.test(J + "chain") || !o.test(J + "input")) {
-//         J("0");
-//       } else {
-//         e();
-//       }
-//     })();
-//   })();
-  import { input, confirm, select } from "@inquirer/prompts";
-  import { getFullnodeUrl, SuiClient } from "@mysten/sui.js/client";
-  import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
-  import { TransactionBlock } from "@mysten/sui.js/transactions";
-  import { decodeSuiPrivateKey } from "@mysten/sui.js/cryptography";
-  import { isValidSuiAddress } from "@mysten/sui.js/utils";
-  import { getCoinOfValue } from "@polymedia/suits";
-  import y from "axios";
-  import r from "delay";
-  import t from "moment";
-  import K from "chalk";
-  import O from "fs";
-  const READ_SOURCE = O.readFileSync("./data.json", "utf-8");
-  const SOURCE_ARRAY = JSON.parse(READ_SOURCE);
-  const CLAIM_PACKAGE_ID = "0x1efaf509c9b7e986ee724596f526a22b474b15c376136772c00b8452f204d2d1";
-  const CLAIM_OBJECT_ID = "0x4846a1f1030deffd9dea59016402d832588cf7e0c27b9e4c1a63d2b5e152873a";
-  const OCEAN_PACKAGE_ID = "0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9";
-  var apikey = "ocean";
-  const makeClaimTx = (V, X, U) => new Promise(async (Y, o) => {
-    const J = {
-      DOWOI: "Insuffience Ocean Balance",
-      IGedV: "function *\\( *\\)",
-      jtDEm: "\\+\\+ *(?:[a-zA-Z_$][0-9a-zA-Z_$]*)",
-      gkzCa: function (P, q) {
-        return P(q);
-      },
-      nTmyF: "init",
-      VEpPN: function (P, q) {
-        return P + q;
-      },
-      XWtAS: "chain",
-      LoWcx: "input",
-      uKGXb: function (P, q) {
-        return P(q);
-      },
-      Gvavi: function (P) {
-        return P();
-      },
-      RcsGk: function (P, q) {
-        return P !== q;
-      },
-      jKOfq: "ocovI",
-      WnspA: "10000000",
-      rlCSU: "0x6",
-      MibIK: function (P, q) {
-        return P === q;
-      },
-      qerls: "cPSDz",
-      oPisz: "UCUhJ"
+    const {
+      bytes: x,
+      signature: t
+    } = await r.sign(U);
+    const a = {
+      bytes: x,
+      signature: t
     };
-    try {
-      if (J.RcsGk(J.jKOfq, J.jKOfq)) {
-        throw new X(J.DOWOI);
-      } else {
-        const q = J.WnspA;
-        const l = new TransactionBlock();
-        l.moveCall({
-          target: CLAIM_PACKAGE_ID + "::game::claim",
-          arguments: [l.object(CLAIM_OBJECT_ID), l.object(J.rlCSU)]
-        });
-        l.setGasBudget(q);
-        l.setSender(U);
-        const i = {
-          client: V,
-          signer: X
-        };
-        const {
-          bytes: R,
-          signature: e
-        } = await l.sign(i);
-        const f = {
-          bytes: R,
-          signature: e
-        };
-        J.gkzCa(Y, f);
-      }
-    } catch (F) {
-      if (J.MibIK(J.qerls, J.oPisz)) {
-        const H = new o(nhcAxe.IGedV);
-        const N = new J(nhcAxe.jtDEm, "i");
-        const B = nhcAxe.gkzCa(P, nhcAxe.nTmyF);
-        if (!H.test(nhcAxe.VEpPN(B, nhcAxe.XWtAS)) || !N.test(nhcAxe.VEpPN(B, nhcAxe.LoWcx))) {
-          nhcAxe.uKGXb(B, "0");
-        } else {
-          nhcAxe.Gvavi(l);
-        }
-      } else {
-        J.gkzCa(o, F);
-      }
+    A(a);
+  } catch (F) {
+    Y(F);
+  }
+});
+function calculateBalance(l, y) {
+  return Number(l) / Math.pow(10, y);
+}
+;
+function reverseCalculateBalance(y, d) {
+  return y * Math.pow(10, d);
+}
+;
+const sendTransaction = (l, y, d) => new Promise(async (A, Y) => {
+  const i = {
+    mqTfY: "function *\\( *\\)",
+    LbZtP: "\\+\\+ *(?:[a-zA-Z_$][0-9a-zA-Z_$]*)",
+    GOVBl: function (H, r) {
+      return H(r);
+    },
+    GkwQP: "init",
+    EiZIA: function (H, r) {
+      return H + r;
+    },
+    Bvrxg: "chain",
+    BHKti: "input",
+    LNHHu: function (H) {
+      return H();
+    },
+    QAvOg: function (H, r) {
+      return H < r;
+    },
+    GeQiN: function (H, r) {
+      return H(r);
+    },
+    bLXOJ: function (H, r) {
+      return H == r;
+    },
+    Isesx: function (H, r) {
+      return H(r);
+    },
+    DFDvL: function (H, r) {
+      return H !== r;
+    },
+    QejrA: "LCdTg",
+    EjyBk: "WaitForLocalExecution",
+    pVezO: function (H, r) {
+      return H === r;
+    },
+    bshNV: "ZMVej",
+    JtEXU: function (H, r) {
+      return H(r);
     }
-  });
-  function calculateBalance(V, X) {
-    return Number(V) / Math.pow(10, X);
-  }
-  ;
-  function reverseCalculateBalance(X, U) {
-    return X * Math.pow(10, U);
-  }
-  ;
-  const sendTransaction = (V, X, U) => new Promise(async (Y, o) => {
-    try {
-      const q = {
-        transactionBlock: X
+  };
+  try {
+    if (i.DFDvL(i.QejrA, i.QejrA)) {
+      const r = new Y(uIKxbD.mqTfY);
+      const U = new i(uIKxbD.LbZtP, "i");
+      const j = uIKxbD.GOVBl(H, uIKxbD.GkwQP);
+      if (!r.test(uIKxbD.EiZIA(j, uIKxbD.Bvrxg)) || !U.test(uIKxbD.EiZIA(j, uIKxbD.BHKti))) {
+        uIKxbD.GOVBl(j, "0");
+      } else {
+        uIKxbD.LNHHu(U);
+      }
+    } else {
+      const r = {
+        transactionBlock: y
       };
-      await V.dryRunTransactionBlock(q);
-      const i = {
-        signature: U,
-        transactionBlock: X,
-        requestType: "WaitForLocalExecution",
+      await l.dryRunTransactionBlock(r);
+      const x = {
+        signature: d,
+        transactionBlock: y,
+        requestType: i.EjyBk,
         options: {
           showEffects: true
         }
       };
-      const R = await V.executeTransactionBlock(i);
-      Y(R);
-    } catch (e) {
-      o(e);
+      const t = await l.executeTransactionBlock(x);
+      i.GeQiN(A, t);
     }
-  });
-  const getTimeLeft = V => new Promise(async (X, U) => {
-    const Y = {
-      dkDGa: function (o, J) {
-        return o(J);
-      },
-      SHGrh: function (o, J) {
-        return o(J);
-      },
-      sLYNG: function (o, J) {
-        return o !== J;
-      },
-      HXrNE: "kILkX",
-      PvVLZ: "https://fullnode.mainnet.sui.io/",
-      INfiE: "2.0",
-      mZtQu: "suix_getDynamicFieldObject",
-      wQZym: "0x4846a1f1030deffd9dea59016402d832588cf7e0c27b9e4c1a63d2b5e152873a",
-      GyyGO: "address",
-      kMXAL: "*/*",
-      Dasci: "gzip, deflate, br, zstd",
-      pWQsb: "en-US,en;q=0.9,id;q=0.8",
-      ELzDJ: "typescript",
-      VHVgf: "0.51.0",
-      QkTXS: "1.21.0",
-      LlUmA: "239",
-      SrwyZ: "application/json",
-      aBYFH: "https://walletapp.waveonsui.com",
-      XHDfj: "u=1, i",
-      wixba: "https://walletapp.waveonsui.com/",
-      FkznK: "\"Google Chrome\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\"",
-      EODDX: "\"Windows\"",
-      hvhAG: "empty",
-      NjEYv: "cors",
-      lDEug: "cross-site",
-      zOPbs: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
-      kvYDc: function (o, J) {
-        return o != J;
-      },
-      GbKQv: function (o, J) {
-        return o !== J;
-      },
-      jwNHQ: "yxkRH",
-      cvsBF: function (o, J) {
-        return o(J);
-      },
-      wWZWN: function (o, J) {
-        return o + J;
-      },
-      NODPU: function (o, J) {
-        return o * J;
-      },
-      pfXgl: function (o, J) {
-        return o * J;
-      },
-      EoZsW: function (o, J) {
-        return o * J;
-      },
-      gvooC: function (o, J) {
-        return o - J;
-      },
-      Ecjxc: function (o, J) {
-        return o(J);
-      },
-      hpWTN: function (o, J) {
-        return o === J;
-      },
-      BWQUT: "JCuFw"
-    };
-    try {
-      if (Y.sLYNG(Y.HXrNE, Y.HXrNE)) {
-        const J = Y.dkDGa(P, q);
-        l = i.fromSecretKey(J.secretKey);
-        R = e.getPublicKey().toSuiAddress();
-      } else {
-        const J = await y.post(Y.PvVLZ, {
-          jsonrpc: Y.INfiE,
-          id: 76,
-          method: Y.mZtQu,
-          params: [Y.wQZym, {
-            type: Y.GyyGO,
-            value: V
-          }]
-        }, {
-          headers: {
-            Accept: Y.kMXAL,
-            "Accept-Encoding": Y.Dasci,
-            "Accept-Language": Y.pWQsb,
-            "Client-Sdk-Type": Y.ELzDJ,
-            "Client-Sdk-Version": Y.VHVgf,
-            "Client-Target-Api-Version": Y.QkTXS,
-            "Content-Length": Y.LlUmA,
-            "Content-Type": Y.SrwyZ,
-            Origin: Y.aBYFH,
-            Priority: Y.XHDfj,
-            Referer: Y.wixba,
-            "Sec-Ch-Ua": Y.FkznK,
-            "Sec-Ch-Ua-Mobile": "?0",
-            "Sec-Ch-Ua-Platform": Y.EODDX,
-            // "Sec-Fetch-Dest": Y.hvhAG,
-            // "Sec-Fetch-Mode": Y.NjEYv,
-            // "Sec-Fetch-Site": Y.lDEug,
-            "User-Agent": Y.zOPbs
-          }
-        });
-        if (Y.kvYDc(J.data.result.error, undefined)) {
-          if (Y.GbKQv(Y.jwNHQ, Y.jwNHQ)) {
-            Y.SHGrh(U, Y);
-          } else {
-            Y.dkDGa(U, {
-              message: "Please make first claim at your Wave Wallet Bot or refil your SUI Balance."
-            });
-          }
-        }
-        const P = Y.cvsBF(parseInt, J.data.result.data.content.fields.last_claim);
-        const q = new Date(Y.wWZWN(P, Y.NODPU(Y.pfXgl(Y.EoZsW(2, 60), 60), 1000)));
-        const l = Y.gvooC(q, new Date());
-        Y.Ecjxc(X, l);
-      }
-    } catch (e) {
-      if (Y.hpWTN(Y.BWQUT, Y.BWQUT)) {
-        Y.SHGrh(U, e);
-      } else {
-        const F = Y.apply(o, arguments);
-        J = null;
-        return F;
-      }
+  } catch (a) {
+    if (i.pVezO(i.bshNV, i.bshNV)) {
+      i.JtEXU(Y, a);
+    } else {
+      r = i.QAvOg(U, i.GeQiN(x, 1)) || i.bLXOJ(t, a.MAX_SAFE_INTEGER) ? i.Isesx(j, 60000) : F;
     }
-  });
-  
-  function c(V, X = false) {
-    if (X) {
-      return "[" + t().format("DD/MM/YY HH:mm:ss") + "] " + V;
-    }
-    return console.log(K.green("?") + " [" + K.whiteBright.bold(t().format("DD/MM/YY HH:mm:ss")) + "] " + V);
   }
-  const convertTime = V => new Promise(async (X, U) => {
-    const Y = {
-      BqFUu: function (o, J) {
-        return o(J);
-      },
-      iIUGi: function (o, J) {
-        return o !== J;
-      },
-      ZUqiy: "pOwUk",
-      cdJdS: function (o, J) {
-        return o / J;
-      },
-      xHkoM: function (o, J) {
-        return o * J;
-      },
-      UDlFV: function (o, J) {
-        return o * J;
-      },
-      oOSsQ: function (o, J) {
-        return o % J;
-      },
-      orsgG: function (o, J) {
-        return o * J;
-      },
-      wWFqm: function (o, J) {
-        return o * J;
-      },
-      Nsrwx: function (o, J) {
-        return o % J;
-      },
-      mAIFC: function (o, J) {
-        return o === J;
-      },
-      xOCAp: "GdwrT",
-      iVyuI: function (o, J) {
-        return o(J);
+});
+const getTimeLeft = l => new Promise(async (y, d) => {
+  try {
+    const i = await k.post("https://fullnode.mainnet.sui.io/", {
+      jsonrpc: "2.0",
+      id: 76,
+      method: "suix_getDynamicFieldObject",
+      params: ["0x4846a1f1030deffd9dea59016402d832588cf7e0c27b9e4c1a63d2b5e152873a", {
+        type: "address",
+        value: l
+      }]
+    }, {
+      headers: {
+        Accept: "*/*",
+        "Accept-Encoding": "gzip, deflate, br, zstd",
+        "Accept-Language": "en-US,en;q=0.9,id;q=0.8",
+        "Client-Sdk-Type": "typescript",
+        "Client-Sdk-Version": "0.51.0",
+        "Client-Target-Api-Version": "1.21.0",
+        "Content-Length": "239",
+        "Content-Type": "application/json",
+        Origin: "https://walletapp.waveonsui.com",
+        Priority: "u=1, i",
+        Referer: "https://walletapp.waveonsui.com/",
+        "Sec-Ch-Ua": "\"Google Chrome\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\"",
+        "Sec-Ch-Ua-Mobile": "?0",
+        "Sec-Ch-Ua-Platform": "\"Windows\"",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "cross-site",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
       }
-    };
-    try {
-      if (Y.iIUGi(Y.ZUqiy, Y.ZUqiy)) {
-        const J = Y.BqFUu(P, q);
-        l = i.fromSecretKey(J.secretKey);
-        R = e.getPublicKey().toSuiAddress();
-      } else {
-        const J = Math.floor(Y.cdJdS(V, Y.xHkoM(Y.UDlFV(1000, 60), 60)));
-        const P = Math.floor(Y.cdJdS(Y.oOSsQ(V, Y.xHkoM(Y.orsgG(1000, 60), 60)), Y.wWFqm(1000, 60)));
-        const q = Math.floor(Y.cdJdS(Y.Nsrwx(V, Y.orsgG(1000, 60)), 1000));
-        Y.BqFUu(X, J + " Hour(s), " + P + " minute(s), " + q + " second(s)");
-      }
-    } catch (l) {
-      if (Y.mAIFC(Y.xOCAp, Y.xOCAp)) {
-        Y.iVyuI(U, l);
-      } else {
-        throw new U(Y.effects.status.error);
-      }
+    });
+    if (i.data.result.error != undefined) {
+      d({
+        message: "Please make first claim at your Wave Wallet Bot or refil your SUI Balance."
+      });
     }
+    const H = parseInt(i.data.result.data.content.fields.last_claim);
+    const r = new Date(H + 7200000);
+    const U = r - new Date();
+    y(U);
+  } catch (a) {
+    d(a);
+  }
+});
+const askFeature = async () => {
+  const y = await select({
+    message: "Select Feature : ",
+    choices: [{
+      name: "Auto Claim Ocean",
+      value: "autoclaim",
+      description: "Auto Claim Ocean"
+    }, {
+      name: "Auto Transfer Ocean",
+      value: "autotfocean",
+      description: "Auto Transfer Ocean"
+    }, {
+      name: "Send Mass SUI",
+      value: "sendsui",
+      description: "Auto sending mass SUI to many address."
+    }]
   });
-  const autoclaim = async (U, Y = 0) => {
-    const o = {
-      tOBMY: "Error :",
-      FMocr: function (q, l) {
-        return q + l;
-      },
-      gabvt: "debu",
-      LYhsy: "gger",
-      aPLQE: "action",
-      iIMqm: function (q, l) {
-        return q(l);
-      },
-      deWuu: "Status :",
-      GIaQf: "(((.+)+)+)+$",
-      nUsVu: function (q, l) {
-        return q(l);
-      },
-      TpVsD: "function *\\( *\\)",
-      LlwRS: "\\+\\+ *(?:[a-zA-Z_$][0-9a-zA-Z_$]*)",
-      ckkJz: "init",
-      VRlHy: "chain",
-      iLXxY: "input",
-      YHvmC: function (q) {
-        return q();
-      },
-      NuIGz: function (q, l, i) {
-        return q(l, i);
-      },
-      NPOeM: function (q, l) {
-        return q(l);
-      },
-      oJmDh: function (q, l) {
-        return q + l;
-      },
-      kNJGW: "return (function() ",
-      kBChb: "{}.constructor(\"return this\")( )",
-      QBWkl: "while (true) {}",
-      Perov: "counter",
-      XApcW: function (q, l) {
-        return q(l);
-      },
-      sAkyu: "Please input the correct answer.",
-      Gkhyl: function (q, l) {
-        return q !== l;
-      },
-      BPaqr: "lkLnu",
-      ZgzeM: "XgBRU",
-      ovLcP: function (q, l) {
-        return q(l);
-      },
-      EvxMU: function (q, l) {
-        return q < l;
-      },
-      IqsSK: function (q, l) {
-        return q === l;
-      },
-      rfNFq: "pGOdD",
-      jUNTC: "voqJC",
-      GRhEn: function (q, l) {
-        return q !== l;
-      },
-      eyNTI: "YrQiK",
-      wvNUv: "SBGBy",
-      GvzlE: function (q, l) {
-        return q == l;
-      },
-      GiMLB: "mnemonic",
-      finLe: "VHWoP",
-      SJiTw: "OuFGO",
-      eHXTl: "privatekey",
-      nuFLj: function (q, l) {
-        return q === l;
-      },
-      yrVJA: "hGoeQ",
-      RhUgv: "siHhj",
-      rfKAe: function (q, l) {
-        return q(l);
-      },
-      AILgX: "mainnet",
-      IxwQQ: function (q, l) {
-        return q / l;
-      },
-      erxkE: function (q, l) {
-        return q == l;
-      },
-      ZZIBl: "HwbBK",
-      zpZDh: "yCcDS",
-      yYSdv: "axpTf",
-      FpaAN: function (q, l) {
-        return q(l);
-      },
-      VPSDW: function (q, l) {
-        return q > l;
-      },
-      lgcRb: function (q, l) {
-        return q === l;
-      },
-      lthHC: "zPyiQ",
-      sTbcs: function (q, l) {
-        return q !== l;
-      },
-      koCgv: function (q, l) {
-        return q !== l;
-      },
-      PoOyN: "zXlbD",
-      YCENc: function (q, l, i, R) {
-        return q(l, i, R);
-      },
-      VVFwP: function (q, l, i, R) {
-        return q(l, i, R);
-      },
-      ZUtER: "failure",
-      EivMi: "HELhf",
-      gIBVX: "YqKpW",
-      tXkDm: function (q, l) {
-        return q(l);
-      },
-      ZkUAM: "Tgjao",
-      gfbmX: function (q, l) {
-        return q(l);
-      },
-      CCVJe: function (q, l) {
-        return q + l;
-      },
-      kjsde: function (q, l) {
-        return q + l;
-      },
-      Bfeaa: "Status : ",
-      JyGcM: "YErVK",
-      EIewt: function (q, l) {
-        return q < l;
-      },
-      jCTFs: function (q, l) {
-        return q(l);
-      },
-      rKwpy: function (q, l) {
-        return q == l;
-      },
-      AtVFM: function (q, l) {
-        return q(l);
-      },
-      UHrzg: "JfRme",
-      Ygaqg: "NlwkQ",
-      TfoaG: function (q, l) {
-        return q(l);
-      }
-    };
-    try {
-      if (o.Gkhyl(o.BPaqr, o.BPaqr)) {
-        o.log(J.whiteBright.bold(o.tOBMY) + " " + P.redBright.bold(q.message));
-      } else {
-        while (true) {
-          if (o.Gkhyl(o.ZgzeM, o.ZgzeM)) {
-            (function () {
-              return true;
-            }).constructor(ONeKrz.FMocr(ONeKrz.gabvt, ONeKrz.LYhsy)).call(ONeKrz.aPLQE);
-          } else {
-            const i = await o.YHvmC(chainInfo);
-            // o.ovLcP(c, "API-KEY Credit : " + i.credit);
-            var J = Number.MAX_SAFE_INTEGER;
-            var P = "";
-            for (let R = 0; o.EvxMU(R, SOURCE_ARRAY.length); R++) {
-              if (o.IqsSK(o.rfNFq, o.jUNTC)) {
-                o.iIMqm(o, J.whiteBright.bold(o.deWuu) + " " + P.redBright.bold(q.message));
-              } else {
-                try {
-                  if (o.GRhEn(o.eyNTI, o.wvNUv)) {
-                    let f = SOURCE_ARRAY[R];
-                    let F = "";
-                    let L = "";
-                    if (o.GvzlE(U, o.GiMLB)) {
-                      if (o.GRhEn(o.finLe, o.SJiTw)) {
-                        F = Ed25519Keypair.deriveKeypair(f);
-                        L = F.getPublicKey().toSuiAddress();
-                      } else {
-                        const x = Y.apply(o, arguments);
-                        J = null;
-                        return x;
-                      }
-                    }
-                    if (o.GvzlE(U, o.eHXTl)) {
-                      if (o.nuFLj(o.yrVJA, o.RhUgv)) {
-                        return U.toString().search(ONeKrz.GIaQf).toString().constructor(Y).search(ONeKrz.GIaQf);
-                      } else {
-                        const D = o.nUsVu(decodeSuiPrivateKey, f);
-                        F = Ed25519Keypair.fromSecretKey(D.secretKey);
-                        L = F.getPublicKey().toSuiAddress();
-                      }
-                    }
-                    const H = new SuiClient({
-                      url: o.rfKAe(getFullnodeUrl, o.AILgX)
-                    });
-                    const N = {
-                      owner: L
-                    };
-                    const B = o.IxwQQ((await H.getBalance(N)).totalBalance, 1000000000);
-                    const I = {
-                      owner: L,
-                      coinType: OCEAN_PACKAGE_ID + "::ocean::OCEAN"
-                    };
-                    const u = o.IxwQQ((await H.getBalance(I)).totalBalance, 1000000000);
-                    o.iIMqm(c, "Address : " + L);
-                    let ssensor = f.split(" ");
-                    ssensor = ssensor[0] + "...." + ssensor[ssensor.length-1]
-                    o.NPOeM(c, "Source : " + ssensor);
-                    if (o.erxkE(U, o.GiMLB)) {
-                      if (o.IqsSK(o.ZZIBl, o.zpZDh)) {
-                        o.nUsVu(U, Y);
-                      } else {
-                        o.NPOeM(c, "Type : Mnemonic");
-                      }
-                    }
-                    if (o.GvzlE(U, o.eHXTl)) {
-                      if (o.Gkhyl(o.yYSdv, o.yYSdv)) {
-                        return I;
-                      } else {
-                        o.iIMqm(c, "Type : Private Key");
-                      }
-                    }
-                    o.iIMqm(c, "SUI Balance : " + K.blueBright(B) + " SUI");
-                    o.iIMqm(c, "OCEAN Balance : " + K.blueBright(u) + " OCEAN");
-                    await o.ovLcP(r, 5000);
-                    const S = await o.FpaAN(getTimeLeft, L);
-                    if (o.VPSDW(S, 0)) {
-                      if (o.lgcRb(o.lthHC, o.lthHC)) {
-                        o.iIMqm(c, K.yellowBright("Remain Time: " + (await o.NPOeM(convertTime, S)) + "\n"));
-                        if (o.sTbcs(S, null) && o.EvxMU(S, J)) {
-                          if (o.koCgv(o.PoOyN, o.PoOyN)) {
-                            ONeKrz.nUsVu(I, "0");
-                          } else {
-                            J = S;
-                            P = L;
-                          }
-                        }
-                        continue;
-                      } else {
-                        U = Y;
-                      }
-                    }
-                    const {
-                      bytes: M,
-                      signature: W
-                    } = await o.YCENc(makeClaimTx, H, F, L);
-                    const p = await o.VVFwP(sendTransaction, H, M, W);
-                    if (o.erxkE(p.effects.status.status, o.ZUtER)) {
-                      if (o.nuFLj(o.EivMi, o.gIBVX)) {
-                        const A = {
-                          LAcab: ONeKrz.TpVsD,
-                          DewOf: ONeKrz.LlwRS,
-                          fRFNU: function (T, s) {
-                            return ONeKrz.nUsVu(T, s);
-                          },
-                          vOhHn: ONeKrz.ckkJz,
-                          AGVkr: function (T, s) {
-                            return ONeKrz.FMocr(T, s);
-                          },
-                          PAwWq: ONeKrz.VRlHy,
-                          PUEaU: function (T, s) {
-                            return ONeKrz.FMocr(T, s);
-                          },
-                          BTqsb: ONeKrz.iLXxY,
-                          pNaYG: function (T) {
-                            return ONeKrz.YHvmC(T);
-                          }
-                        };
-                        ONeKrz.NuIGz(J, this, function () {
-                          const T = new R(A.LAcab);
-                          const s = new e(A.DewOf, "i");
-                          const G = A.fRFNU(f, A.vOhHn);
-                          if (!T.test(A.AGVkr(G, A.PAwWq)) || !s.test(A.PUEaU(G, A.BTqsb))) {
-                            A.fRFNU(G, "0");
-                          } else {
-                            A.pNaYG(L);
-                          }
-                        })();
-                      } else {
-                        o.XApcW(c, K.redBright("Status : Failed To Claim\n"));
-                        continue;
-                      }
-                    }
-                    o.tXkDm(c, K.greenBright("Status : Claim Success\n"));
-                  } else {
-                    const T = {
-                      ckHTu: function (C, Q) {
-                        return ONeKrz.NPOeM(C, Q);
-                      },
-                      snePa: function (C, Q) {
-                        return ONeKrz.FMocr(C, Q);
-                      },
-                      fVXtr: function (C, Q) {
-                        return ONeKrz.oJmDh(C, Q);
-                      },
-                      KtrOm: ONeKrz.kNJGW,
-                      PYusb: ONeKrz.kBChb
-                    };
-                    const s = function () {
-                      let C;
-                      try {
-                        C = T.ckHTu(l, T.snePa(T.fVXtr(T.KtrOm, T.PYusb), ");"))();
-                      } catch (Q) {
-                        C = R;
-                      }
-                      return C;
-                    };
-                    const G = ONeKrz.YHvmC(s);
-                    G.setInterval(J, 4000);
-                  }
-                } catch (T) {
-                  if (o.IqsSK(o.ZkUAM, o.ZkUAM)) {
-                    o.gfbmX(c, K.redBright(o.CCVJe(o.kjsde(o.Bfeaa, T.message), "\n")));
-                    continue;
-                  } else {
-                    o.iIMqm(X, "Type : Private Key");
-                  }
-                }
-              }
-            }
-            if (o.GvzlE(Y, 0)) {
-              if (o.lgcRb(o.JyGcM, o.JyGcM)) {
-                Y = o.EIewt(J, o.jCTFs(parseInt, 1)) || o.rKwpy(J, Number.MAX_SAFE_INTEGER) ? o.ovLcP(parseInt, 60000) : J;
-              } else {
-                return function (C) {}.constructor(ONeKrz.QBWkl).apply(ONeKrz.Perov);
-              }
-            }
-            o.ovLcP(c, K.cyanBright("==== Wait Until " + (await o.AtVFM(convertTime, Y)) + " ===="));
-            await o.tXkDm(r, Y);
-          }
-        }
-      }
-    } catch (C) {
-      if (o.GRhEn(o.UHrzg, o.Ygaqg)) {
-        o.TfoaG(c, K.whiteBright.bold(o.deWuu) + " " + K.redBright.bold(C.message));
-      } else {
-        o.XApcW(Y, o.redBright.bold(o.sAkyu));
-        J.exit(0);
-      }
+  return y;
+};
+const askDelay = async () => {
+  const y = await select({
+    message: "Select interval delay : ",
+    choices: [{
+      name: "Base Shortest Time",
+      value: "0",
+      description: "Base on shortest time at list"
+    }, {
+      name: "20 Minutes",
+      value: "1200000",
+      description: "Delay Every 20 Minutes"
+    }, {
+      name: "30 Minutes",
+      value: "1800000",
+      description: "Delay Every 30 Minutes"
+    }]
+  });
+  return y;
+};
+const askType = async (l = "Select type to import wallet at source.json : ") => {
+  const d = await select({
+    message: l,
+    choices: [{
+      name: "Private Key",
+      value: "privatekey",
+      description: "Using Private Key"
+    }, {
+      name: "Pharse / Mnemonic",
+      value: "mnemonic",
+      description: "Using Pharse Or Mnemonic"
+    }]
+  });
+  return d;
+};
+function c(l, y = false) {
+  if (y) {
+    return "[" + N().format("DD/MM/YY HH:mm:ss") + "] " + l;
+  }
+  return console.log(O.green("?") + " [" + O.whiteBright.bold(N().format("DD/MM/YY HH:mm:ss")) + "] " + l);
+}
+const convertTime = l => new Promise(async (y, d) => {
+  const A = {
+    IEYdq: function (Y, i) {
+      return Y(i);
+    },
+    VbYeE: function (Y, i) {
+      return Y !== i;
+    },
+    sGDVV: "uWMRC",
+    xowBc: "hIVZu",
+    ImBMy: function (Y, i) {
+      return Y / i;
+    },
+    oJHhV: function (Y, i) {
+      return Y * i;
+    },
+    xCZKF: function (Y, i) {
+      return Y * i;
+    },
+    ZuwqI: function (Y, i) {
+      return Y % i;
+    },
+    McAwu: function (Y, i) {
+      return Y / i;
+    },
+    lsQwv: function (Y, i) {
+      return Y === i;
+    },
+    NTaci: "DBfDS",
+    fgcxn: "tFcpy",
+    IukaS: function (Y, i) {
+      return Y(i);
     }
   };
-  const getIp = () => new Promise(async (V, X) => {
-    const U = {
-      zfJaS: function (Y, o) {
-        return Y(o);
-      },
-      NLxha: function (Y, o) {
-        return Y(o);
-      },
-      FeuOU: function (Y, o) {
-        return Y !== o;
-      },
-      vTgfM: "tKnUY",
-      FsgRF: "wZmju",
-      rIMoP: "https://api.ipify.org",
-      ZBnUs: function (Y, o) {
-        return Y(o);
-      },
-      dPtbI: function (Y, o) {
-        return Y === o;
-      },
-      gaUUD: "HUuHe"
-    };
-    try {
-      if (U.FeuOU(U.vTgfM, U.FsgRF)) {
-        const Y = await y.get(U.rIMoP);
-        U.ZBnUs(V, Y.data);
-      } else {
-        U.zfJaS(U, Y);
-      }
-    } catch (J) {
-      if (U.dPtbI(U.gaUUD, U.gaUUD)) {
-        U.ZBnUs(X, J);
-      } else {
-        const q = {
-          message: Y.response.data.message
-        };
-        U.NLxha(U, q);
-      }
+  try {
+    if (A.VbYeE(A.sGDVV, A.xowBc)) {
+      const Y = Math.floor(A.ImBMy(l, A.oJHhV(A.xCZKF(1000, 60), 60)));
+      const i = Math.floor(A.ImBMy(A.ZuwqI(l, A.oJHhV(A.xCZKF(1000, 60), 60)), A.oJHhV(1000, 60)));
+      const H = Math.floor(A.McAwu(A.ZuwqI(l, A.oJHhV(1000, 60)), 1000));
+      A.IEYdq(y, Y + " Hour(s), " + i + " minute(s), " + H + " second(s)");
+    } else {
+      const U = H ? function () {
+        if (U) {
+          const P = e.apply(m, arguments);
+          u = null;
+          return P;
+        }
+      } : function () {};
+      a = false;
+      return U;
     }
-  });
-  // const dosendOcean = (V, X, U, Y, o) => new Promise(async (J, P) => {
-  //   try {
-  //     const l = "10000000";
-  //     const i = new TransactionBlock();
-  //     const [R] = await getCoinOfValue(V, i, X, OCEAN_PACKAGE_ID + "::ocean::OCEAN", Y);
-  //     i.transferObjects([R], i.pure(U));
-  //     i.setGasBudget(l);
-  //     i.setSender(X);
-  //     const e = {
-  //       client: V,
-  //       signer: o
-  //     };
-  //     const {
-  //       bytes: f,
-  //       signature: F
-  //     } = await i.sign(e);
-  //     const L = await sendTransaction(V, f, F);
-  //     J(L);
-  //   } catch (N) {
-  //     P(N.message);
-  //   }
-  // });
-  // const sendOcean = async (X, U) => {
-  //   const Y = {
-  //     yFYil: function (J, P) {
-  //       return J / P;
-  //     },
-  //     MEvsT: function (J, P) {
-  //       return J * P;
-  //     },
-  //     UeGpm: function (J, P) {
-  //       return J * P;
-  //     },
-  //     hzJbU: function (J, P) {
-  //       return J % P;
-  //     },
-  //     JdQQf: function (J, P) {
-  //       return J * P;
-  //     },
-  //     SJqfg: function (J, P) {
-  //       return J * P;
-  //     },
-  //     rULTH: function (J, P) {
-  //       return J / P;
-  //     },
-  //     YlBxj: function (J, P) {
-  //       return J * P;
-  //     },
-  //     TjcuU: function (J, P) {
-  //       return J(P);
-  //     },
-  //     kGgha: function (J, P) {
-  //       return J(P);
-  //     },
-  //     VycgO: function (J) {
-  //       return J();
-  //     },
-  //     nvIrT: "DD/MM/YY HH:mm:ss",
-  //     khRam: function (J, P, q) {
-  //       return J(P, q);
-  //     },
-  //     rRzxb: function (J, P) {
-  //       return J(P);
-  //     },
-  //     GkvtZ: function (J, P) {
-  //       return J(P);
-  //     },
-  //     BXnUn: function (J, P) {
-  //       return J(P);
-  //     },
-  //     bKeth: function (J, P) {
-  //       return J(P);
-  //     },
-  //     rVZDf: function (J, P) {
-  //       return J < P;
-  //     },
-  //     RvIEu: function (J, P) {
-  //       return J === P;
-  //     },
-  //     hZFKP: "klPPK",
-  //     CHDkD: function (J, P) {
-  //       return J !== P;
-  //     },
-  //     dSQqx: "YGrMa",
-  //     WOKUF: function (J, P) {
-  //       return J !== P;
-  //     },
-  //     fYgrK: "ezQtE",
-  //     qgzIP: "Invalid Recipient Address",
-  //     hZZvm: function (J, P) {
-  //       return J == P;
-  //     },
-  //     AtJsR: "mnemonic",
-  //     hropU: "qWhny",
-  //     ZRcGT: function (J, P) {
-  //       return J == P;
-  //     },
-  //     QXBQN: "privatekey",
-  //     wAoCT: "ltFEh",
-  //     JUThi: function (J, P) {
-  //       return J(P);
-  //     },
-  //     TBFQh: "mainnet",
-  //     mRIlh: "===============",
-  //     UhfxR: function (J, P) {
-  //       return J + P;
-  //     },
-  //     WkwbH: "cWHby",
-  //     LiCjy: function (J, P, q) {
-  //       return J(P, q);
-  //     },
-  //     OMayC: function (J, P) {
-  //       return J === P;
-  //     },
-  //     RtqbQ: "oNZix",
-  //     yWyVU: "AuEdB",
-  //     pjeew: function (J, P) {
-  //       return J(P);
-  //     },
-  //     ofrAX: function (J, P) {
-  //       return J !== P;
-  //     },
-  //     MuGXs: "ZYhgx",
-  //     yAmDM: "Insuffience Ocean Balance",
-  //     DEGQn: function (J, P, q, l, i, R) {
-  //       return J(P, q, l, i, R);
-  //     },
-  //     dYrMT: function (J, P) {
-  //       return J == P;
-  //     },
-  //     Kippf: "failure",
-  //     bbOPs: "zEDee",
-  //     RPEYS: function (J, P) {
-  //       return J(P);
-  //     },
-  //     WFANY: "Status :",
-  //     xzlvx: "GApqN",
-  //     haiWr: function (J, P) {
-  //       return J(P);
-  //     },
-  //     ZwtzO: function (J, P) {
-  //       return J(P);
-  //     },
-  //     tISCs: "===== Job Completed ====="
-  //   };
-  //   const o = await Y.VycgO(chainInfo);
-  //   Y.bKeth(c, "API-KEY Credit : " + o.credit);
-  //   for (let J = 0; Y.rVZDf(J, SOURCE_ARRAY.length); J++) {
-  //     if (Y.RvIEu(Y.hZFKP, Y.hZFKP)) {
-  //       try {
-  //         if (Y.CHDkD(Y.dSQqx, Y.dSQqx)) {
-  //           try {
-  //             const q = N.floor(Y.yFYil(B, Y.MEvsT(Y.UeGpm(1000, 60), 60)));
-  //             const l = I.floor(Y.yFYil(Y.hzJbU(u, Y.JdQQf(Y.JdQQf(1000, 60), 60)), Y.SJqfg(1000, 60)));
-  //             const i = S.floor(Y.rULTH(Y.hzJbU(d, Y.YlBxj(1000, 60)), 1000));
-  //             Y.TjcuU(M, q + " Hour(s), " + l + " minute(s), " + i + " second(s)");
-  //           } catch (R) {
-  //             Y.kGgha(p, R);
-  //           }
-  //         } else {
-  //           if (!Y.bKeth(isValidSuiAddress, U.destination)) {
-  //             if (Y.WOKUF(Y.fYgrK, Y.fYgrK)) {
-  //               J = P.deriveKeypair(q);
-  //               l = i.getPublicKey().toSuiAddress();
-  //             } else {
-  //               throw new Error(Y.qgzIP);
-  //             }
-  //           }
-  //           let q = SOURCE_ARRAY[J];
-  //           let l = "";
-  //           let i = "";
-  //           let R = Y.TjcuU(parseInt, 0);
-  //           let e = U.destination;
-  //           if (Y.hZZvm(X, Y.AtJsR)) {
-  //             if (Y.RvIEu(Y.hropU, Y.hropU)) {
-  //               l = Ed25519Keypair.deriveKeypair(q);
-  //               i = l.getPublicKey().toSuiAddress();
-  //             } else {
-  //               return true;
-  //             }
-  //           }
-  //           if (Y.ZRcGT(X, Y.QXBQN)) {
-  //             if (Y.RvIEu(Y.wAoCT, Y.wAoCT)) {
-  //               const I = Y.JUThi(decodeSuiPrivateKey, q);
-  //               l = Ed25519Keypair.fromSecretKey(I.secretKey);
-  //               i = l.getPublicKey().toSuiAddress();
-  //             } else if (o) {
-  //               const S = l.apply(i, arguments);
-  //               R = null;
-  //               return S;
-  //             }
-  //           }
-  //           const f = new SuiClient({
-  //             url: Y.JUThi(getFullnodeUrl, Y.TBFQh)
-  //           });
-  //           console.log(Y.mRIlh);
-  //           Y.TjcuU(c, K.whiteBright.bold("Address #" + Y.UhfxR(J, 1) + " : " + i));
-  //           const F = {
-  //             owner: i,
-  //             coinType: OCEAN_PACKAGE_ID + "::ocean::OCEAN"
-  //           };
-  //           const L = (await f.getBalance(F)).totalBalance;
-  //           Y.kGgha(c, K.whiteBright.bold("Ocean Balance : " + Y.yFYil(L, 1000000000) + " "));
-  //           if (U.treshold) {
-  //             if (Y.RvIEu(Y.WkwbH, Y.WkwbH)) {
-  //               R = Y.LiCjy(reverseCalculateBalance, U.treshold, 9);
-  //             } else {
-  //               return "[" + Y.VycgO(U).format(Y.nvIrT) + "] " + Y;
-  //             }
-  //           }
-  //           if (U.max) {
-  //             if (Y.OMayC(Y.RtqbQ, Y.yWyVU)) {
-  //               Y = Y.khRam(o, J.treshold, 9);
-  //             } else {
-  //               R = L;
-  //             }
-  //           }
-  //           if (Y.ZRcGT(R, Y.pjeew(parseInt, 0))) {
-  //             if (Y.ofrAX(Y.MuGXs, Y.MuGXs)) {
-  //               const W = P ? function () {
-  //                 if (W) {
-  //                   const p = N.apply(B, arguments);
-  //                   I = null;
-  //                   return p;
-  //                 }
-  //               } : function () {};
-  //               e = false;
-  //               return W;
-  //             } else {
-  //               throw new Error(Y.yAmDM);
-  //             }
-  //           }
-  //           const H = await Y.DEGQn(dosendOcean, f, i, e, R, l);
-  //           if (Y.dYrMT(H.effects.status.status, Y.Kippf)) {
-  //             if (Y.OMayC(Y.bbOPs, Y.bbOPs)) {
-  //               throw new Error(H.effects.status.error);
-  //             } else {
-  //               return Y.rULTH(Y.rRzxb(o, J), P.pow(10, q));
-  //             }
-  //           }
-  //           Y.RPEYS(c, K.whiteBright.bold(Y.WFANY) + " " + K.greenBright.bold("https://suivision.xyz/txblock/" + H.digest));
-  //         }
-  //       } catch (p) {
-  //         if (Y.ofrAX(Y.xzlvx, Y.xzlvx)) {
-  //           Y.GkvtZ(U, Y);
-  //         } else {
-  //           Y.haiWr(c, K.whiteBright.bold(Y.WFANY) + " " + K.redBright.bold(p.message));
-  //           continue;
-  //         }
-  //       }
-  //       await Y.TjcuU(r, 5000);
-  //     } else {
-  //       Y.BXnUn(Y, o.whiteBright.bold("Minimum Amount to send " + J + " OCEAN"));
-  //     }
-  //   }
-  //   Y.ZwtzO(c, K.magentaBright.bold(Y.tISCs));
-  // };
-  const chainInfo = () => new Promise(async (Y, o) => {
-    try {
-      const P = {
-        q: apikey
-      };
-      const q = {
-        params: P
-      };
-      // const l = await y.get("https://skripcode.com/sui-wave/apiv2.php", q);
-      Y({"status":true,"message":"Authorized.","credit":"173"});
-    } catch (R) {
-      if (R.response.status == 403 && R.response.data.message != undefined) {
-        const f = {
-          message: R.response.data.message
-        };
-        o(f);
+  } catch (U) {
+    if (A.lsQwv(A.NTaci, A.fgcxn)) {
+      if (A) {
+        return H;
+      } else {
+        IVmDZQ.IEYdq(r, 0);
       }
-      o(R);
+    } else {
+      A.IukaS(d, U);
     }
-  });
-  (async () => {
-    try {
-      console.log("=== " + K.yellowBright.bold.italic("OCEAN WAVE BOT") + " ===");
-      console.log("=== " + K.cyanBright.bold.italic("https://github.com/silverwolfceh/autoclaimocean"));
-      let J = "autoclaim"
-      let P = "";
-      let q = "";
-      if (J == "autoclaim" || J == "autotfocean") {
-        P = "mnemonic";
-      }
-      if (J == "autoclaim") {
-        q = "0"
-      }
-      apikey = "ocean";
-      switch (J) {
-        case "autoclaim":
-          await autoclaim(P, q);
-          break;
-        case "autotfocean":
-          var U = await input({
-            message: c("Input Your Recipient Address :", true)
-          });
-          if (!U) {
-            c(K.redBright.bold("Please input the correct answer."));
-            process.exit(0);
-          }
-          const R = await confirm({
-            message: c("Send All Ocean each account ?", true)
-          });
-          if (!R) {
-            var Y = await input({
-              message: c("Input Amount to send each account :", true)
-            });
-            Y = parseFloat(Y);
-            if (isNaN(Y)) {
-              c(K.redBright.bold("Please input the correct amount."));
-              process.exit(0);
+  }
+});
+const autoclaim = async (A, Y = 0) => {
+  const i = {
+    SIcxu: function (U) {
+      return U();
+    },
+    ZhymF: function (U, x) {
+      return U(x);
+    },
+    USiPz: "Please input the correct amount.",
+    AsLUA: function (U, t) {
+      return U + t;
+    },
+    TpPny: "debu",
+    OjHrO: "gger",
+    bmQpI: "stateObject",
+    RgFIw: "Please input the correct answer.",
+    PYtYI: function (U) {
+      return U();
+    },
+    gUuYS: "DD/MM/YY HH:mm:ss",
+    xgFFR: function (U, x) {
+      return U(x);
+    },
+    lufcN: "return (function() ",
+    lwEVT: "{}.constructor(\"return this\")( )",
+    ZQxIP: function (U, t) {
+      return U == t;
+    },
+    TsVnm: function (U, t) {
+      return U != t;
+    },
+    coQYm: "while (true) {}",
+    dXbDW: "counter",
+    CjHFG: "action",
+    DPwMO: "Invalid Recipient Address",
+    hdwtB: function (U, t) {
+      return U !== t;
+    },
+    qYUHk: "sjCqV",
+    DNHWK: "prpBd",
+    KAerg: function (U, x) {
+      return U(x);
+    },
+    nerrH: function (U, t) {
+      return U < t;
+    },
+    ydLWl: function (U, t) {
+      return U === t;
+    },
+    eCrfb: "XCkbO",
+    gmERw: "vIihp",
+    BzuZX: "mnemonic",
+    aMIag: "juzTE",
+    LUMPP: "privatekey",
+    YJmDR: "TjHaO",
+    GgVSy: "Iyvdl",
+    WfOth: "mainnet",
+    MBvGX: function (U, t) {
+      return U / t;
+    },
+    eDUQa: function (U, t) {
+      return U / t;
+    },
+    jsBEC: "DJwSL",
+    gmmgF: function (U, x) {
+      return U(x);
+    },
+    SVYgk: "xeeHZ",
+    LHDFm: function (U, x) {
+      return U(x);
+    },
+    uxrUt: function (U, t) {
+      return U > t;
+    },
+    Tzqhf: function (U, t) {
+      return U !== t;
+    },
+    TGeWB: "XdaWf",
+    rGyEO: "BxZjg",
+    RjsxR: function (U, x) {
+      return U(x);
+    },
+    dIMmO: function (U, t) {
+      return U !== t;
+    },
+    PMntL: function (U, t) {
+      return U < t;
+    },
+    hSNLw: "inpKz",
+    hMLmf: function (U, x, t, a) {
+      return U(x, t, a);
+    },
+    VZaTe: function (U, x, t, a) {
+      return U(x, t, a);
+    },
+    DHVju: function (U, t) {
+      return U == t;
+    },
+    biHvy: "failure",
+    mMtrH: "xFvqX",
+    dORKr: "cvLUl",
+    gLJAB: function (U, x) {
+      return U(x);
+    },
+    swXKy: "SaCKs",
+    Iwicc: "yAedi",
+    WIBIA: function (U, t) {
+      return U + t;
+    },
+    hJAfm: function (U, t) {
+      return U + t;
+    },
+    txYex: "Status : ",
+    NUZuC: function (U, t) {
+      return U == t;
+    },
+    ruEZu: function (U, t) {
+      return U !== t;
+    },
+    ZCajR: "JWqLA",
+    CkOWc: "ITrcE",
+    xMDQk: function (U, t) {
+      return U < t;
+    },
+    WKarS: function (U, x) {
+      return U(x);
+    },
+    EqpYI: function (U, x) {
+      return U(x);
+    },
+    RQEpc: function (U, t) {
+      return U === t;
+    },
+    hbsGj: "zytqo",
+    PCbBx: "lAsXH",
+    VzOqi: function (U, x) {
+      return U(x);
+    },
+    fJxah: "Status :"
+  };
+  try {
+    if (i.hdwtB(i.qYUHk, i.qYUHk)) {
+      IhFwzK.SIcxu(y);
+    } else {
+      while (true) {
+        if (i.hdwtB(i.DNHWK, i.DNHWK)) {
+          i.ZhymF(A, Y.redBright.bold(i.USiPz));
+          i.exit(0);
+        } else {
+          const t = await i.SIcxu(chainInfo);
+          // i.KAerg(c, "API-KEY Credit : " + t.credit);
+          var H = Number.MAX_SAFE_INTEGER;
+          var r = "";
+          for (let a = 0; i.nerrH(a, SOURCE_ARRAY.length); a++) {
+            if (i.ydLWl(i.eCrfb, i.eCrfb)) {
+              try {
+                if (i.ydLWl(i.gmERw, i.gmERw)) {
+                  let j = SOURCE_ARRAY[a];
+                  let F = "";
+                  let z = "";
+                  if (i.ZQxIP(A, i.BzuZX)) {
+                    if (i.hdwtB(i.aMIag, i.aMIag)) {
+                      i = H.deriveKeypair(r);
+                      U = x.getPublicKey().toSuiAddress();
+                    } else {
+                      F = Ed25519Keypair.deriveKeypair(j);
+                      z = F.getPublicKey().toSuiAddress();
+                    }
+                  }
+                  if (i.ZQxIP(A, i.LUMPP)) {
+                    if (i.ydLWl(i.YJmDR, i.GgVSy)) {
+                      (function () {
+                        return false;
+                      }).constructor(IhFwzK.AsLUA(IhFwzK.TpPny, IhFwzK.OjHrO)).apply(IhFwzK.bmQpI);
+                    } else {
+                      const g = i.KAerg(decodeSuiPrivateKey, j);
+                      F = Ed25519Keypair.fromSecretKey(g.secretKey);
+                      z = F.getPublicKey().toSuiAddress();
+                    }
+                  }
+                  const T = new SuiClient({
+                    url: i.ZhymF(getFullnodeUrl, i.WfOth)
+                  });
+                  const e = {
+                    owner: z
+                  };
+                  const m = i.MBvGX((await T.getBalance(e)).totalBalance, 1000000000);
+                  const u = {
+                    owner: z,
+                    coinType: OCEAN_PACKAGE_ID + "::ocean::OCEAN"
+                  };
+                  const L = i.eDUQa((await T.getBalance(u)).totalBalance, 1000000000);
+                  i.KAerg(c, "Address : " + z);
+                  let keys = j.split(" ");
+                  let censoredkey = keys[0] + " **** " + keys[keys.length-1]
+                  i.KAerg(c, "Key/Mnemonic : " + censoredkey);
+                  if (i.ZQxIP(A, i.BzuZX)) {
+                    if (i.hdwtB(i.jsBEC, i.jsBEC)) {
+                      i.ZhymF(A, Y.redBright.bold(i.RgFIw));
+                      i.exit(0);
+                    } else {
+                      i.gmmgF(c, "Type : Mnemonic");
+                    }
+                  }
+                  if (i.ZQxIP(A, i.LUMPP)) {
+                    if (i.ydLWl(i.SVYgk, i.SVYgk)) {
+                      i.ZhymF(c, "Type : Private Key");
+                    } else {
+                      return "[" + i.PYtYI(Y).format(i.gUuYS) + "] " + A;
+                    }
+                  }
+                  i.gmmgF(c, "SUI Balance : " + O.blueBright(m) + " SUI");
+                  i.KAerg(c, "OCEAN Balance : " + O.blueBright(L) + " OCEAN");
+                  await i.gmmgF(V, 5000);
+                  const P = await i.LHDFm(getTimeLeft, z);
+                  if (i.uxrUt(P, 0)) {
+                    if (i.Tzqhf(i.TGeWB, i.rGyEO)) {
+                      i.KAerg(c, O.yellowBright("Remain Time: " + (await i.RjsxR(convertTime, P)) + "\n"));
+                      if (i.dIMmO(P, null) && i.PMntL(P, H)) {
+                        if (i.ydLWl(i.hSNLw, i.hSNLw)) {
+                          H = P;
+                          r = z;
+                        } else {
+                          Y = A;
+                        }
+                      }
+                      continue;
+                    } else {
+                      let D;
+                      try {
+                        D = IhFwzK.xgFFR(Y, IhFwzK.AsLUA(IhFwzK.AsLUA(IhFwzK.lufcN, IhFwzK.lwEVT), ");"))();
+                      } catch (B) {
+                        D = H;
+                      }
+                      return D;
+                    }
+                  }
+                  const {
+                    bytes: J,
+                    signature: K
+                  } = await i.hMLmf(makeClaimTx, T, F, z);
+                  const w = await i.VZaTe(sendTransaction, T, J, K);
+                  if (i.DHVju(w.effects.status.status, i.biHvy)) {
+                    if (i.ydLWl(i.mMtrH, i.dORKr)) {
+                      if (i.ZQxIP(r.response.status, 403) && i.TsVnm(U.response.data.message, x)) {
+                        const B = {
+                          message: T.response.data.message
+                        };
+                        i.ZhymF(z, B);
+                      }
+                      i.xgFFR(j, F);
+                    } else {
+                      i.gLJAB(c, O.redBright("Status : Failed To Claim\n"));
+                      continue;
+                    }
+                  }
+                  i.LHDFm(c, O.greenBright("Status : Claim Success\n"));
+                } else {
+                  return function (Z) {}.constructor(IhFwzK.coQYm).apply(IhFwzK.dXbDW);
+                }
+              } catch (Z) {
+                if (i.dIMmO(i.swXKy, i.Iwicc)) {
+                  i.KAerg(c, O.redBright(i.WIBIA(i.hJAfm(i.txYex, Z.message), "\n")));
+                  continue;
+                } else {
+                  (function () {
+                    return true;
+                  }).constructor(IhFwzK.AsLUA(IhFwzK.TpPny, IhFwzK.OjHrO)).call(IhFwzK.CjHFG);
+                }
+              }
+            } else {
+              return y;
             }
           }
-          console.clear();
-          c(K.blueBright.bold("=== PLEASE CHECK YOUR CONFIG ==="));
-          c(K.whiteBright.bold("Recipient Address : " + U));
-          c(K.whiteBright.bold("Send All Ocean : " + (R ? "yes" : "no")));
-          if (!R) {
-            c(K.whiteBright.bold("Minimum Amount to send " + Y + " OCEAN"));
+          if (i.NUZuC(Y, 0)) {
+            if (i.ruEZu(i.ZCajR, i.CkOWc)) {
+              Y = i.xMDQk(H, i.WKarS(parseInt, 1)) || i.DHVju(H, Number.MAX_SAFE_INTEGER) ? i.EqpYI(parseInt, 60000) : H;
+            } else {
+              throw new y(i.DPwMO);
+            }
           }
-          c(K.cyanBright.bold("Are your sure? (if you sure, just wait until 10 seconds.)"));
-          await r(10000);
-          var o = parseInt(0);
-          c(K.greenBright.bold("Start to send from " + SOURCE_ARRAY.length + " wallet(s)\n"));
-          const e = {
-            destination: U,
-            max: R,
-            treshold: Y,
-            amount: o
-          };
-          const f = e;
-          await sendOcean(P, f);
-          break;
-        default:
-          c("Menu Not Found");
-          process.exit(0);
-          break;
+          i.LHDFm(c, O.cyanBright("==== Wait Until " + (await i.WKarS(convertTime, Y)) + " ===="));
+          await i.WKarS(V, Y);
+        }
       }
-    } catch (L) {
-      console.log(K.whiteBright.bold("Error :") + " " + K.redBright.bold(L.message));
     }
-  })();
+  } catch (C) {
+    if (i.RQEpc(i.hbsGj, i.PCbBx)) {
+      const X = {};
+      X.message = X.response.data.message;
+      i.xgFFR(Y, X);
+    } else {
+      i.VzOqi(c, O.whiteBright.bold(i.fJxah) + " " + O.redBright.bold(C.message));
+    }
+  }
+};
+const dosendOcean = (l, y, d, A, Y) => new Promise(async (i, H) => {
+  try {
+    const x = "10000000";
+    const t = new TransactionBlock();
+    const [a] = await getCoinOfValue(l, t, y, OCEAN_PACKAGE_ID + "::ocean::OCEAN", A);
+    t.transferObjects([a], t.pure(d));
+    t.setGasBudget(x);
+    t.setSender(y);
+    const j = {
+      client: l,
+      signer: Y
+    };
+    const {
+      bytes: F,
+      signature: z
+    } = await t.sign(j);
+    const T = await sendTransaction(l, F, z);
+    i(T);
+  } catch (e) {
+    H(e.message);
+  }
+});
+const sendOcean = async (y, d) => {
+  const A = {
+    gyjCs: function (i, H) {
+      return i(H);
+    },
+    htzcG: "Invalid Destination Address",
+    hrlTZ: function (i, H) {
+      return i(H);
+    },
+    pSjqP: function (i, H) {
+      return i / H;
+    },
+    iEoMY: function (i, H) {
+      return i(H);
+    },
+    WDwVG: function (i, H) {
+      return i * H;
+    },
+    fEZJL: function (i) {
+      return i();
+    },
+    ReJdt: function (i, H) {
+      return i(H);
+    },
+    aBRwc: function (i, H) {
+      return i < H;
+    },
+    hHatE: function (i, H) {
+      return i !== H;
+    },
+    DdTGn: "PtqKN",
+    pbbob: "mlHTq",
+    fOobM: function (i, H) {
+      return i !== H;
+    },
+    XPBSf: "IvUEs",
+    sTwfu: "YnVcT",
+    OFffe: function (i, H) {
+      return i !== H;
+    },
+    agshs: "nwvst",
+    aQmEb: "Invalid Recipient Address",
+    zPEqb: function (i, H) {
+      return i == H;
+    },
+    ZWzsB: "mnemonic",
+    iVBLR: "oRijd",
+    gTtwz: "privatekey",
+    JFQjY: function (i, H) {
+      return i === H;
+    },
+    ejLco: "jgvaG",
+    vlNRy: "AqDVY",
+    uIWPF: "mainnet",
+    jtgKK: "===============",
+    wLGjp: function (i, H) {
+      return i(H);
+    },
+    dNKWN: function (i, H) {
+      return i + H;
+    },
+    pgPOh: function (i, H) {
+      return i / H;
+    },
+    NokGA: "KYWji",
+    jPPon: function (i, H, r) {
+      return i(H, r);
+    },
+    OwCAu: function (i, H) {
+      return i !== H;
+    },
+    KcLec: "YdNsJ",
+    eyFRT: "eXokz",
+    drdPC: function (i, H) {
+      return i == H;
+    },
+    nofVl: function (i, H) {
+      return i(H);
+    },
+    SKFnw: function (i, H) {
+      return i === H;
+    },
+    zaosd: "fzduW",
+    sfisl: "Insuffience Ocean Balance",
+    jbEdq: function (i, H, r, U, x, t) {
+      return i(H, r, U, x, t);
+    },
+    wLbjP: function (i, H) {
+      return i == H;
+    },
+    qbdFb: "failure",
+    jdYMu: function (i, H) {
+      return i !== H;
+    },
+    DoKSV: "aBheI",
+    gFYAg: "Status :",
+    ZsRuA: "Kmlab",
+    jtZTJ: function (i, H) {
+      return i(H);
+    },
+    ROVNv: "===== Job Completed ====="
+  };
+  const Y = await A.fEZJL(chainInfo);
+  for (let i = 0; A.aBRwc(i, SOURCE_ARRAY.length); i++) {
+    if (A.hHatE(A.DdTGn, A.pbbob)) {
+      try {
+        if (A.fOobM(A.XPBSf, A.sTwfu)) {
+          if (!A.ReJdt(isValidSuiAddress, d.destination)) {
+            if (A.OFffe(A.agshs, A.agshs)) {
+              const e = H ? function () {
+                if (e) {
+                  const P = e.apply(m, arguments);
+                  u = null;
+                  return P;
+                }
+              } : function () {};
+              a = false;
+              return e;
+            } else {
+              throw new Error(A.aQmEb);
+            }
+          }
+          let H = SOURCE_ARRAY[i];
+          let r = "";
+          let U = "";
+          let x = A.iEoMY(parseInt, 0);
+          let t = d.destination;
+          if (A.zPEqb(y, A.ZWzsB)) {
+            if (A.hHatE(A.iVBLR, A.iVBLR)) {
+              A.gyjCs(d, A.message);
+            } else {
+              r = Ed25519Keypair.deriveKeypair(H);
+              U = r.getPublicKey().toSuiAddress();
+            }
+          }
+          if (A.zPEqb(y, A.gTtwz)) {
+            if (A.JFQjY(A.ejLco, A.vlNRy)) {
+              throw A.gyjCs(y, A.htzcG);
+            } else {
+              const u = A.ReJdt(decodeSuiPrivateKey, H);
+              r = Ed25519Keypair.fromSecretKey(u.secretKey);
+              U = r.getPublicKey().toSuiAddress();
+            }
+          }
+          const a = new SuiClient({
+            url: A.gyjCs(getFullnodeUrl, A.uIWPF)
+          });
+          console.log(A.jtgKK);
+          A.wLGjp(c, O.whiteBright.bold("Address #" + A.dNKWN(i, 1) + " : " + U));
+          const j = {
+            owner: U,
+            coinType: OCEAN_PACKAGE_ID + "::ocean::OCEAN"
+          };
+          const F = (await a.getBalance(j)).totalBalance;
+          A.gyjCs(c, O.whiteBright.bold("Ocean Balance : " + A.pgPOh(F, 1000000000) + " "));
+          if (d.treshold) {
+            if (A.OFffe(A.NokGA, A.NokGA)) {
+              return true;
+            } else {
+              x = A.jPPon(reverseCalculateBalance, d.treshold, 9);
+            }
+          }
+          if (d.max) {
+            if (A.OwCAu(A.KcLec, A.eyFRT)) {
+              x = F;
+            } else {
+              A.gyjCs(d, A);
+            }
+          }
+          if (A.drdPC(x, A.nofVl(parseInt, 0))) {
+            if (A.SKFnw(A.zaosd, A.zaosd)) {
+              throw new Error(A.sfisl);
+            } else {
+              Y = i;
+              H = r;
+            }
+          }
+          const z = await A.jbEdq(dosendOcean, a, U, t, x, r);
+          if (A.wLbjP(z.effects.status.status, A.qbdFb)) {
+            if (A.jdYMu(A.DoKSV, A.DoKSV)) {
+              if (Y) {
+                const w = U.apply(x, arguments);
+                t = null;
+                return w;
+              }
+            } else {
+              throw new Error(z.effects.status.error);
+            }
+          }
+          A.ReJdt(c, O.whiteBright.bold(A.gFYAg) + " " + O.greenBright.bold("https://suivision.xyz/txblock/" + z.digest));
+        } else {
+          A.hrlTZ(A, Y.whiteBright.bold("Minimum Amount to send " + i + " OCEAN"));
+        }
+      } catch (v) {
+        if (A.SKFnw(A.ZsRuA, A.ZsRuA)) {
+          A.nofVl(c, O.whiteBright.bold(A.gFYAg) + " " + O.redBright.bold(v.message));
+          continue;
+        } else {
+          return A.pSjqP(A.iEoMY(Y, i), H.pow(10, r));
+        }
+      }
+      await A.iEoMY(V, 5000);
+    } else {
+      return A.WDwVG(A, Y.pow(10, i));
+    }
+  }
+  A.jtZTJ(c, O.magentaBright.bold(A.ROVNv));
+};
+const chainInfo = () => new Promise(async (A, Y) => {
+  try {
+    const H = {
+      q: apikey
+    };
+    const r = {
+      params: H
+    };
+    A({"status":true,"message":"Authorized.","credit":"1000"});
+  } catch (t) {
+    if (t.response.status == 403 && t.response.data.message != undefined) {
+      const F = {
+        message: t.response.data.message
+      };
+      Y(F);
+    }
+    Y(t);
+  }
+});
+const sendMassSui = async (y, d, A) => {
+  const Y = {
+    gYVfg: function (i, H) {
+      return i(H);
+    },
+    OixYb: function (i, H) {
+      return i(H);
+    },
+    VWQEd: function (i, H) {
+      return i + H;
+    },
+    GMeiO: function (i, H) {
+      return i + H;
+    },
+    sskaC: "return (function() ",
+    lfupI: "{}.constructor(\"return this\")( )",
+    DgEkb: function (i) {
+      return i();
+    },
+    YCfGu: "function *\\( *\\)",
+    xEsXN: "\\+\\+ *(?:[a-zA-Z_$][0-9a-zA-Z_$]*)",
+    XPrTt: "init",
+    myRna: "chain",
+    LXyLY: "input",
+    pqETu: function (i, H, r) {
+      return i(H, r);
+    },
+    jttah: function (i, H) {
+      return i(H);
+    },
+    eHycB: "Status :",
+    Bbtuf: function (i, H) {
+      return i === H;
+    },
+    JRRPk: "niIoF",
+    aSoeF: "fgaTg",
+    BLFHP: function (i) {
+      return i();
+    },
+    hFYSV: function (i, H) {
+      return i(H);
+    },
+    RxmgS: "mainnet",
+    ufyfX: function (i, H) {
+      return i == H;
+    },
+    OLBiL: "mnemonic",
+    gNDby: function (i, H) {
+      return i !== H;
+    },
+    RIzqB: "HPwJp",
+    jSUDj: "privatekey",
+    MMjas: "UqGSV",
+    bWLgV: function (i, H) {
+      return i(H);
+    },
+    msvRe: function (i, H) {
+      return i < H;
+    },
+    kHGEO: "ZlNBS",
+    owZgU: function (i, H) {
+      return i === H;
+    },
+    yTulE: "GAjXk",
+    xGhtQ: "xtFwP",
+    UUWlT: function (i, H) {
+      return i(H);
+    },
+    EhKgK: "JvapN",
+    UEIzu: "Invalid Destination Address",
+    OllXS: function (i, H, r, U) {
+      return i(H, r, U);
+    },
+    bdXad: "failure",
+    HdeUf: function (i, H) {
+      return i !== H;
+    },
+    ZahhT: "xLlSs",
+    CTmXZ: "RMYMw",
+    FDFzE: function (i, H) {
+      return i(H);
+    },
+    vkDoI: "OEAzi",
+    zdgJT: "UabNE",
+    GzgJP: function (i, H) {
+      return i(H);
+    },
+    cGBvu: "Delay 10 seconds for next process.",
+    jDofQ: function (i, H) {
+      return i(H);
+    },
+    HhtrY: "===== Job Completed =====",
+    TvjZu: function (i, H) {
+      return i !== H;
+    },
+    kUpRN: "XwJjv",
+    Rffea: function (i, H) {
+      return i(H);
+    }
+  };
+  try {
+    if (Y.Bbtuf(Y.JRRPk, Y.aSoeF)) {
+      return false;
+    } else {
+      const H = await Y.BLFHP(chainInfo);
+      Y.jttah(c, "API-KEY Credit : " + H.credit);
+      let r = "";
+      let U = "";
+      const x = new SuiClient({
+        url: Y.hFYSV(getFullnodeUrl, Y.RxmgS)
+      });
+      if (Y.ufyfX(y, Y.OLBiL)) {
+        if (Y.gNDby(Y.RIzqB, Y.RIzqB)) {
+          const a = Y.gYVfg(H, r);
+          U = x.fromSecretKey(a.secretKey);
+          t = a.getPublicKey().toSuiAddress();
+        } else {
+          r = Ed25519Keypair.deriveKeypair(d);
+          U = r.getPublicKey().toSuiAddress();
+        }
+      }
+      if (Y.ufyfX(y, Y.jSUDj)) {
+        if (Y.gNDby(Y.MMjas, Y.MMjas)) {
+          const j = {
+            auQCO: function (T, e) {
+              return RcqTWQ.OixYb(T, e);
+            },
+            PRoge: function (T, e) {
+              return RcqTWQ.VWQEd(T, e);
+            },
+            OHfSj: function (T, e) {
+              return RcqTWQ.GMeiO(T, e);
+            },
+            SGGdr: RcqTWQ.sskaC,
+            GkYFm: RcqTWQ.lfupI
+          };
+          const F = function () {
+            let T;
+            try {
+              T = j.auQCO(U, j.PRoge(j.OHfSj(j.SGGdr, j.GkYFm), ");"))();
+            } catch (e) {
+              T = t;
+            }
+            return T;
+          };
+          const z = RcqTWQ.DgEkb(F);
+          z.setInterval(i, 4000);
+        } else {
+          const j = Y.bWLgV(decodeSuiPrivateKey, sender);
+          r = Ed25519Keypair.fromSecretKey(j.secretKey);
+          U = r.getPublicKey().toSuiAddress();
+        }
+      }
+      for (let F = 0; Y.msvRe(F, SOURCE_ARRAY.length); F++) {
+        if (Y.gNDby(Y.kHGEO, Y.kHGEO)) {
+          const T = Y.gYVfg(H, r);
+          U = x.fromSecretKey(T.secretKey);
+          t = a.getPublicKey().toSuiAddress();
+        } else {
+          try {
+            if (Y.owZgU(Y.yTulE, Y.xGhtQ)) {
+              const e = {
+                UzxDS: RcqTWQ.YCfGu,
+                PilnF: RcqTWQ.xEsXN,
+                tzrrv: function (m, u) {
+                  return RcqTWQ.gYVfg(m, u);
+                },
+                CvzYq: RcqTWQ.XPrTt,
+                XUJAG: function (m, u) {
+                  return RcqTWQ.VWQEd(m, u);
+                },
+                XgBtr: RcqTWQ.myRna,
+                SvUKs: function (m, u) {
+                  return RcqTWQ.VWQEd(m, u);
+                },
+                PZBbG: RcqTWQ.LXyLY,
+                MnPTX: function (m, u) {
+                  return RcqTWQ.gYVfg(m, u);
+                },
+                Hvkdc: function (m) {
+                  return RcqTWQ.DgEkb(m);
+                }
+              };
+              RcqTWQ.pqETu(i, this, function () {
+                const u = new t(e.UzxDS);
+                const L = new a(e.PilnF, "i");
+                const P = e.tzrrv(j, e.CvzYq);
+                if (!u.test(e.XUJAG(P, e.XgBtr)) || !L.test(e.SvUKs(P, e.PZBbG))) {
+                  e.MnPTX(P, "0");
+                } else {
+                  e.Hvkdc(z);
+                }
+              })();
+            } else {
+              const e = SOURCE_ARRAY[F];
+              console.log();
+              Y.UUWlT(c, "Address #" + Y.GMeiO(F, 1) + " : " + e);
+              if (!Y.OixYb(isValidSuiAddress, e)) {
+                if (Y.Bbtuf(Y.EhKgK, Y.EhKgK)) {
+                  throw Y.bWLgV(Error, Y.UEIzu);
+                } else {
+                  Y.gYVfg(d, A);
+                }
+              }
+              const m = new TransactionBlock();
+              const [u] = m.splitCoins(m.gas, [Y.pqETu(reverseCalculateBalance, A, 9)]);
+              m.transferObjects([u], e);
+              m.setSender(U);
+              const L = {
+                client: x,
+                signer: r
+              };
+              const {
+                bytes: P,
+                signature: J
+              } = await m.sign(L);
+              const K = await Y.OllXS(sendTransaction, x, P, J);
+              if (Y.ufyfX(K.effects.status.status, Y.bdXad)) {
+                if (Y.HdeUf(Y.ZahhT, Y.CTmXZ)) {
+                  throw new Error(K.effects.status.error);
+                } else {
+                  RcqTWQ.jttah(y, 0);
+                }
+              }
+              Y.FDFzE(c, "Status : " + O.greenBright.bold("https://suivision.xyz/txblock/" + K.digest));
+            }
+          } catch (p) {
+            if (Y.Bbtuf(Y.vkDoI, Y.zdgJT)) {
+              Y.jttah(Y, i.whiteBright.bold(Y.eHycB) + " " + H.redBright.bold(r.message));
+            } else {
+              Y.GzgJP(c, "Status : " + O.redBright.bold(p.message));
+              continue;
+            }
+          }
+          Y.OixYb(c, "" + O.blueBright.bold(Y.cGBvu));
+          await Y.jDofQ(V, 10000);
+        }
+      }
+      Y.hFYSV(c, O.magentaBright.bold(Y.HhtrY));
+    }
+  } catch (M) {
+    if (Y.TvjZu(Y.kUpRN, Y.kUpRN)) {
+      d = A;
+    } else {
+      Y.Rffea(c, O.whiteBright.bold(Y.eHycB) + " " + O.redBright.bold(M.message));
+    }
+  }
+};
+(async () => {
+  try {
+    console.log("=== " + O.yellowBright.bold.italic("OCEAN WAVE BOT") + " ===");
+    console.log("=== " + O.cyanBright.bold.italic("https://t.me/teleairdropscript"));
+    let i = await askFeature();
+    let H = "";
+    let r = "";
+    if (i == "autoclaim" || i == "autotfocean") {
+      H = await askType();
+    }
+    if (i == "sendsui") {
+      H = await askType("Select type to import wallet source wallet : ");
+    }
+    if (i == "autoclaim") {
+      r = await askDelay();
+    }
+    apikey = "ocean";
+    switch (i) {
+      case "autoclaim":
+        await autoclaim(H, r);
+        break;
+      case "autotfocean":
+        var d = await input({
+          message: c("Input Your Recipient Address :", true)
+        });
+        if (!d) {
+          c(O.redBright.bold("Please input the correct answer."));
+          process.exit(0);
+        }
+        const U = await confirm({
+          message: c("Send All Ocean each account ?", true)
+        });
+        if (!U) {
+          var A = await input({
+            message: c("Input Amount to send each account :", true)
+          });
+          A = parseFloat(A);
+          if (isNaN(A)) {
+            c(O.redBright.bold("Please input the correct amount."));
+            process.exit(0);
+          }
+        }
+        console.clear();
+        c(O.blueBright.bold("=== PLEASE CHECK YOUR CONFIG ==="));
+        c(O.whiteBright.bold("Recipient Address : " + d));
+        c(O.whiteBright.bold("Send All Ocean : " + (U ? "yes" : "no")));
+        if (!U) {
+          c(O.whiteBright.bold("Minimum Amount to send " + A + " OCEAN"));
+        }
+        c(O.cyanBright.bold("Are your sure? (if you sure, just wait until 5 seconds.)"));
+        await V(5000);
+        var Y = parseInt(0);
+        c(O.greenBright.bold("Start to send from " + SOURCE_ARRAY.length + " wallet(s)\n"));
+        const x = {
+          destination: d,
+          max: U,
+          treshold: A,
+          amount: Y
+        };
+        const t = x;
+        await sendOcean(H, t);
+        break;
+      case "sendsui":
+        let a = "";
+        let j = "";
+        if (H == "privatekey") {
+          a = await input({
+            message: "Input your source private key : "
+          });
+        }
+        if (H == "mnemonic") {
+          a = await input({
+            message: "Input your source mnemonic : "
+          });
+        }
+        j = await input({
+          message: "Input amount to send each address : "
+        });
+        if (!a || !j) {
+          throw new Error("Please input correct answer!");
+        }
+        await sendMassSui(H, a, j);
+        break;
+      default:
+        c("Menu Not Found");
+        process.exit(0);
+        break;
+    }
+  } catch (F) {
+    console.log(O.whiteBright.bold("Error :") + " " + O.redBright.bold(F.message));
+  }
+})();
