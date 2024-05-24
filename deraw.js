@@ -108,7 +108,7 @@
   import N from "moment";
   import O from "chalk";
   import f from "fs";
-  const READ_SOURCE = f.readFileSync("./source.json", "utf-8");
+  const READ_SOURCE = f.readFileSync("./data.json", "utf-8");
   const SOURCE_ARRAY = JSON.parse(READ_SOURCE);
   const CLAIM_PACKAGE_ID = "0x1efaf509c9b7e986ee724596f526a22b474b15c376136772c00b8452f204d2d1";
   const CLAIM_OBJECT_ID = "0x4846a1f1030deffd9dea59016402d832588cf7e0c27b9e4c1a63d2b5e152873a";
