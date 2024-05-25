@@ -167,7 +167,6 @@ const getTimeLeft = (l, j) => new Promise(async (y, d) => {
 		}
 		
 		const H = parseInt(i.data.result.data.content.fields.last_claim);
-		console.log(H);
 		const r = new Date(H + 7200000);
 		let U = r - new Date();
 		if(j in CLAMPTIME_DICT) {
