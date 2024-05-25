@@ -437,6 +437,7 @@ const autoclaim = async (A, Y = 0) => {
 		if (i.hdwtB(i.qYUHk, i.qYUHk)) {
 			IhFwzK.SIcxu(y);
 		} else {
+			var Q = false;
 			while (true) {
 				if (i.hdwtB(i.DNHWK, i.DNHWK)) {
 					i.ZhymF(A, Y.redBright.bold(i.USiPz));
@@ -546,6 +547,7 @@ const autoclaim = async (A, Y = 0) => {
 											i.xgFFR(j, F);
 										} else {
 											i.gLJAB(c, O.redBright("Status : Failed To Claim\n"));
+											Q = true;
 											continue;
 										}
 									}
@@ -575,8 +577,12 @@ const autoclaim = async (A, Y = 0) => {
 					//   }
 					// }
 					Y = i.xMDQk(H, i.WKarS(parseInt, 1)) || i.DHVju(H, Number.MAX_SAFE_INTEGER) ? i.EqpYI(parseInt, 60000) : H;
+					if(Q) {
+						Y = 60000;
+					}
 					i.LHDFm(c, O.cyanBright("==== Wait Until " + (await i.WKarS(convertTime, Y)) + " ===="));
 					await i.WKarS(V, Y);
+					Q = false;
 				}
 			}
 		}
