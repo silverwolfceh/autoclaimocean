@@ -11,7 +11,9 @@ import N from "moment";
 import O from "chalk";
 import f from "fs";
 const READ_SOURCE = f.readFileSync("./data.json", "utf-8");
+const READ_CLAMPTIME = f.readFileSync("./claimtime.json", "utf-8");
 const SOURCE_ARRAY = JSON.parse(READ_SOURCE);
+const CLAMPTIME_DICT = JSON.parse(READ_CLAMPTIME);
 const CLAIM_PACKAGE_ID = "0x1efaf509c9b7e986ee724596f526a22b474b15c376136772c00b8452f204d2d1";
 const CLAIM_OBJECT_ID = "0x4846a1f1030deffd9dea59016402d832588cf7e0c27b9e4c1a63d2b5e152873a";
 const OCEAN_PACKAGE_ID = "0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9";
@@ -126,7 +128,7 @@ const sendTransaction = (l, y, d) => new Promise(async (A, Y) => {
 		}
 	}
 });
-const getTimeLeft = l => new Promise(async (y, d) => {
+const getTimeLeft = (l, j) => new Promise(async (y, d) => {
 	try {
 		const i = await k.post("https://fullnode.mainnet.sui.io/", {
 			jsonrpc: "2.0",
@@ -155,7 +157,7 @@ const getTimeLeft = l => new Promise(async (y, d) => {
 				"Sec-Fetch-Dest": "empty",
 				"Sec-Fetch-Mode": "cors",
 				"Sec-Fetch-Site": "cross-site",
-				"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+				"User-Agent": "Mozilla/5.0 (iPad; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Version/15.0 Safari/605.1.15 AlohaBrowser/3.2.6"
 			}
 		});
 		if (i.data.result.error != undefined) {
@@ -163,9 +165,15 @@ const getTimeLeft = l => new Promise(async (y, d) => {
 				message: "Please make first claim at your Wave Wallet Bot or refil your SUI Balance."
 			});
 		}
+		
 		const H = parseInt(i.data.result.data.content.fields.last_claim);
+		console.log(H);
 		const r = new Date(H + 7200000);
-		const U = r - new Date();
+		let U = r - new Date();
+		if(j in CLAMPTIME_DICT) {
+			const r1 = new Date(H + (parseInt(CLAMPTIME_DICT[j]) * 3600 * 1000));
+			U = r1 - new Date();
+		}
 		y(U);
 	} catch (a) {
 		d(a);
@@ -508,7 +516,8 @@ const autoclaim = async (A, Y = 0) => {
 									i.gmmgF(c, "SUI Balance : " + O.blueBright(m) + " SUI");
 									i.KAerg(c, "OCEAN Balance : " + O.blueBright(L) + " OCEAN");
 									await i.gmmgF(V, 5000);
-									const P = await i.LHDFm(getTimeLeft, z);
+									// const P = await i.LHDFm(getTimeLeft, z);
+									const P = await getTimeLeft(z, j);
 									if (i.uxrUt(P, 0)) {
 										if (i.Tzqhf(i.TGeWB, i.rGyEO)) {
 											i.KAerg(c, O.yellowBright("Remain Time: " + (await i.RjsxR(convertTime, P)) + "\n"));
@@ -1039,8 +1048,10 @@ const sendMassSui = async (y, d, A) => {
 								}
 							})();
 						} else {
-							const e = SOURCE_ARRAY[F];
+							let e = SOURCE_ARRAY[F];
 							console.log();
+							//r = Ed25519Keypair.deriveKeypair(e);
+							//e = r.getPublicKey().toSuiAddress();
 							Y.UUWlT(c, "Address #" + Y.GMeiO(F, 1) + " : " + e);
 							if (!Y.OixYb(isValidSuiAddress, e)) {
 								if (Y.Bbtuf(Y.EhKgK, Y.EhKgK)) {
