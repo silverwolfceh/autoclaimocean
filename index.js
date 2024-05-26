@@ -231,6 +231,27 @@ const askType = async (l = "Select type to import wallet at source.json : ") => 
 	});
 	return d;
 };
+
+const askTypeOfData = async (l = "Select address type in data.json : ") => {
+	const d = await select({
+		message: l,
+		choices: [{
+			name: "Private Key",
+			value: "privatekey",
+			description: "Using Private Key"
+		}, {
+			name: "Pharse / Mnemonic",
+			value: "mnemonic",
+			description: "Using Pharse Or Mnemonic"
+		}, {
+			name: "SUI Address",
+			value: "suiaddress",
+			description: "Directly sui address"
+		}]
+	});
+	return d;
+};
+
 function c(l, y = false) {
 	if (y) {
 		return "[" + N().format("DD/MM/YY HH:mm:ss") + "] " + l;
@@ -853,7 +874,7 @@ const chainInfo = () => new Promise(async (A, Y) => {
 		Y(t);
 	}
 });
-const sendMassSui = async (y, d, A) => {
+const sendMassSui = async (y, d, A, addrtype = "mnemonic") => {
 	const Y = {
 		gYVfg: function (i, H) {
 			return i(H);
@@ -958,7 +979,7 @@ const sendMassSui = async (y, d, A) => {
 			return false;
 		} else {
 			const H = await Y.BLFHP(chainInfo);
-			Y.jttah(c, "API-KEY Credit : " + H.credit);
+			// Y.jttah(c, "API-KEY Credit : " + H.credit);
 			let r = "";
 			let U = "";
 			const x = new SuiClient({
@@ -1049,8 +1070,15 @@ const sendMassSui = async (y, d, A) => {
 						} else {
 							let e = SOURCE_ARRAY[F];
 							console.log();
-							//r = Ed25519Keypair.deriveKeypair(e);
-							//e = r.getPublicKey().toSuiAddress();
+							if(addrtype == "mnemonic") {
+								let r11 = Ed25519Keypair.deriveKeypair(e);
+								e = r11.getPublicKey().toSuiAddress();
+							} else if (addrtype == "privatekey") {
+								let j11 = Y.bWLgV(decodeSuiPrivateKey, e);
+								let r11 = Ed25519Keypair.fromSecretKey(j11.secretKey);
+								e = r11.getPublicKey().toSuiAddress();
+							}
+							
 							Y.UUWlT(c, "Address #" + Y.GMeiO(F, 1) + " : " + e);
 							if (!Y.OixYb(isValidSuiAddress, e)) {
 								if (Y.Bbtuf(Y.EhKgK, Y.EhKgK)) {
@@ -1168,6 +1196,7 @@ const sendMassSui = async (y, d, A) => {
 			case "sendsui":
 				let a = "";
 				let j = "";
+				let addrtype = "";
 				if (H == "privatekey") {
 					a = await input({
 						message: "Input your source private key : "
@@ -1178,12 +1207,16 @@ const sendMassSui = async (y, d, A) => {
 						message: "Input your source mnemonic : "
 					});
 				}
+				addrtype = await askTypeOfData();
+
 				j = await input({
 					message: "Input amount to send each address : "
 				});
+				
 				if (!a || !j) {
 					throw new Error("Please input correct answer!");
 				}
+
 				await sendMassSui(H, a, j);
 				break;
 			default:
