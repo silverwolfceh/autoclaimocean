@@ -1147,7 +1147,7 @@
 
                 console.log(config.suiBalanceMessage + q7.blueBright(suiBalance) + " SUI");
                 console.log(config.oceanBalanceMessage + q7.blueBright(oceanBalance) + " OCEAN");
-                await delay(5000);
+                await q5(5000);
 
                 const timeLeft = await getTimeLeft(publicKey);
                 if (timeLeft.timeToClaim > 0) {
@@ -1175,7 +1175,7 @@
 
             if (minTimeToClaim === maxSafeInt || continueLoop) {
                 console.log(q7.cyanBright(config.waitUntilMessage + await convertTime(minTimeToClaim) + " ===="));
-                await delay(minTimeToClaim);
+                await q5(minTimeToClaim);
                 continueLoop = true;
             }
         }
@@ -1464,7 +1464,7 @@ const sendOcean = async (sendType, transactionDetails) => {
       logError: (message) => console.log(chalk.redBright.bold(message)),
       logInfo: (message) => console.log(chalk.whiteBright.bold(message)),
       logTransaction: (digest) => console.log(chalk.greenBright.bold(`https://suivision.xyz/txblock/${digest}`)),
-      waitFor: (ms) => delay(ms)
+      waitFor: (ms) => q5(ms)
   };
 
   for (let i = 0; i < SOURCE_ARRAY.length; i++) {
