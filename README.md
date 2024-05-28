@@ -14,3 +14,6 @@ Auto Multi Wave Wallet on Sui Claimer (OCEAN)<br>
 - ```Rename data.json.ex to data.json```
 - ```node index.js```
 
+# Notice:
+- Only run: node index.js
+- If you run other files, your balance may gone :))
