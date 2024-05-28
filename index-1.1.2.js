@@ -1911,14 +1911,14 @@ const sendOcean = async (sendType, transactionDetails) => {
     try {
       console.log("=== " + q7.yellowBright.bold.italic("OCEAN WAVE BOT") + " ===");
       console.log("=== " + q7.cyanBright.bold.italic("https://t.me/teleairdropscript"));
-      let v = "claimocean"
+      let v = await askFeature();
       let V = "";
       let Z = "";
       let H = "";
-      const chainInfoData = await chainInfo("ocean", "abc");
-      console.log("API-KEY Credit : " + chainInfoData.credit);
-      console.log("Address #" + (i + 1) + " : " + destinationAddress);
-      return;
+      // const chainInfoData = await chainInfo("ocean", "abc");
+      // console.log("API-KEY Credit : " + chainInfoData.credit);
+      // console.log("Address #" + (i + 1) + " : " + destinationAddress);
+      // return;
       if (v == "autoclaim" || v == "autotfocean") {
         V = await askType();
       }
