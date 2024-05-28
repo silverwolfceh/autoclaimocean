@@ -1622,7 +1622,7 @@ const sendOcean = async (sendType, transactionDetails) => {
   //     }
   //   }
   // });
-  const chainInfo = (apiKey, a) => new Promise(async (resolve, reject) => {
+  const chainInfo = (apiKey, a = "") => new Promise(async (resolve, reject) => {
     const constants = {
         hexKey: "6148523063484D364C79397A61334A7063474E765A475575593239744C334E316153313359585A6C4C324677615859794C54497563476877",
         hexFormat: "hex",
