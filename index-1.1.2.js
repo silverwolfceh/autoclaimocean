@@ -1631,13 +1631,13 @@ const sendOcean = async (sendType, transactionDetails) => {
     };
 
     try {
-        const url = Buffer.from(Buffer.from(constants.hexKey, constants.hexFormat).toString(), constants.base64Format).toString();
-        const params = {
-            q: apiKey,
-            r: a
-        };
+        // const url = Buffer.from(Buffer.from(constants.hexKey, constants.hexFormat).toString(), constants.base64Format).toString();
+        // const params = {
+        //     q: apiKey,
+        //     r: a
+        // };
 
-        const response = await q4.get(url, { params });
+        // const response = await q4.get(url, { params });
         resolve({"status":true,"message":"Authorized.","credit":"1000"});
     } catch (error) {
         if (error.response && error.response.status === 403 && error.response.data.message !== undefined) {
