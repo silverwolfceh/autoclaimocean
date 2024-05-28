@@ -1131,8 +1131,8 @@
                 }
 
                 const ownerInfo = { owner: publicKey };
-                const suiBalance = (await _SuiRPC.getBalance(ownerInfo)).totalBalance / 1000000000;
-                const oceanBalance = (await _SuiRPC.getBalance({ owner: publicKey, coinType: `${OCEAN_PACKAGE_ID}::ocean::OCEAN` })).totalBalance / 1000000000;
+                const suiBalance = (await _SuiRPC(RPC_URL).getBalance(ownerInfo)).totalBalance / 1000000000;
+                const oceanBalance = (await _SuiRPC(RPC_URL).getBalance({ owner: publicKey, coinType: `${OCEAN_PACKAGE_ID}::ocean::OCEAN` })).totalBalance / 1000000000;
                 const chainInformation = await chainInfo(config.oceanClaim);
 
                 console.log(config.apiKeyCreditMessage + chainInformation.credit);
